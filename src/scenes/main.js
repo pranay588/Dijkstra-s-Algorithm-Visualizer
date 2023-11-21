@@ -152,8 +152,8 @@ export const Main = ()=>{
             if(i >= explore.length-1)
                 stop(exploreInterval);
             let exploreDom  = document.getElementById(explore[i]);
-            exploreDom.style.backgroundColor = "Yellow";
-            i++;
+            exploreDom.style.backgroundColor = "#272f3d";
+            i++;   
         },100);
     }
     
@@ -169,7 +169,7 @@ export const Main = ()=>{
             src = source.current;
             // console.log(getDiv.current.id);
             let srcDom = document.getElementById(e.target.id);
-            srcDom.style.backgroundColor = "tomato";
+            srcDom.style.backgroundColor = "#5139b3";
             console.log(`source ${source.current}`);
         }
             
@@ -179,7 +179,7 @@ export const Main = ()=>{
             destination.current = parseInt(e.target.id);
             desti = destination.current;
             let destiDom = document.getElementById(e.target.id);
-            destiDom.style.backgroundColor="tomato";
+            destiDom.style.backgroundColor="#5139b3";
             console.log(`destination ${destination.current}`);
         }
             
@@ -187,7 +187,7 @@ export const Main = ()=>{
             let a = e.target.id;
             mp[a] = true;
             let wallDom = document.getElementById(a);
-            wallDom.style.backgroundColor = "red";
+            wallDom.style.backgroundColor = "#b3393d";
         }
         
     } 
@@ -202,7 +202,9 @@ export const Main = ()=>{
                 if(i>=ans.length-1)
                     stop(pathInterval);
                 let elem = document.getElementById(ans[i]);
-                elem.style.background = "blue";
+                elem.style.background = "cyan";
+                elem.style.boxShadow = "0 0 5px cyan," +
+                "0 0 25px cyan," + "0 0 50px cyan,"+ "0 0 100px cyan";
                 i++;
             },500);
     }
@@ -234,11 +236,16 @@ export const Main = ()=>{
     
     return(
         <div>
-            <div className="container">
-                {/* <Node/> */}
-                {NODES.map(i=>(<Node data={i} btn={btn} click={clicked} className="manyNodes"/>))}
+            <div className="center-div">
+                <div className="container">
+                    {/* <Node/> */}
+                    {NODES.map(i=>(<Node data={i} btn={btn} click={clicked} className="manyNodes"/>))}
+                </div>
+            </div>
+ 
+            <div className = "buttons-holder"> 
+                <button onClick={updateBtn} id="btn-1" className='btns'>Source</button><button id="btn-2" className='btns' onClick={updateBtn}>Distination</button><button id="btn-3" className='btns' onClick={updateBtn}>Walls</button> <button className='btns' onClick={start}>Start</button><button className='btns'>restart</button>
             </div> 
-            <div> <button onClick={updateBtn} id="btn-1">Source</button><button id="btn-2" onClick={updateBtn}>Distination</button><button id="btn-3" onClick={updateBtn}>Walls</button> <button onClick={start}>Start</button></div> 
         </div>
     );
 }
