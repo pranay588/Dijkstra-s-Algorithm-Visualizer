@@ -204,9 +204,9 @@ export const Main = ()=>{
             resetNode.style.backgroundColor = "#39b386";
             resetNode.style.boxShadow = "none";
         }
-        mp.forEach((i)=>{
-            i = false;
-        });
+        for(let i=0;i<n*n;i++){
+            mp[i] = false;
+        }
     }
    
     function stop(interval){
