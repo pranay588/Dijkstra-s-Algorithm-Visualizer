@@ -189,8 +189,25 @@ export const Main = ()=>{
             let wallDom = document.getElementById(a);
             wallDom.style.backgroundColor = "#b3393d";
         }
-        
+ 
     } 
+
+    function Reset(){
+        setBtn('');
+        source.current = -1;
+        destination.current = -1;
+        dist = [];
+        createEdges = [];
+        ans = [];
+        for(let i=0;i<36;i++){
+            let resetNode = document.getElementById(i);
+            resetNode.style.backgroundColor = "#39b386";
+            resetNode.style.boxShadow = "none";
+        }
+        mp.forEach((i)=>{
+            i = false;
+        });
+    }
    
     function stop(interval){
         clearInterval(interval);
@@ -211,24 +228,22 @@ export const Main = ()=>{
 
     function start(){
         //Error Handling is remainig 
-        createEdges();
-        ans.push(destination.current);
-        dijkstra(source.current);
-        getPath();
-        exploreBoard();
-        console.log(explore.length);
-        setTimeout(()=>{
-            createPath();
-         },100*explore.length);
+        if(source.current !== -1 && destination.current !== -1){
+            createEdges();
+            ans.push(destination.current);
+            dijkstra(source.current);
+            getPath();
+            exploreBoard();
+            console.log(explore.length);
+            setTimeout(()=>{
+                createPath();
+            },100*explore.length);
+        }
+        else    
+            console.log("please select source and destination");
+        // source.current = -1;
+        // destination.current= -1;
         
-        // reversePath(ans);
-        
-        setBtn('');
-        source.current = -1;
-        destination.current= -1;
-        mp.forEach((i)=>{
-            i = false;
-        });
     }
 
     
@@ -244,7 +259,7 @@ export const Main = ()=>{
             </div>
  
             <div className = "buttons-holder"> 
-                <button onClick={updateBtn} id="btn-1" className='btns'>Source</button><button id="btn-2" className='btns' onClick={updateBtn}>Distination</button><button id="btn-3" className='btns' onClick={updateBtn}>Walls</button> <button className='btns' onClick={start}>Start</button><button className='btns'>restart</button>
+                <button onClick={updateBtn} id="btn-1" className='btns'>Source</button><button id="btn-2" className='btns' onClick={updateBtn}>Distination</button><button id="btn-3" className='btns' onClick={updateBtn}>Walls</button> <button className='btns' onClick={start}>Start</button><button className='btns' id="btn-4" onClick={Reset}>Restart</button>
             </div> 
         </div>
     );
