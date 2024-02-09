@@ -67,7 +67,7 @@ function inBound(x,y){
         return true;
 }
 
-function createEdges(){
+function createEdgesFunc(){
     for(let i=0;i<n;i++){
         for(let j=0;j<n;j++){
             if(inBound(i,j+1)){
@@ -149,7 +149,7 @@ function exploreBoard(){
         if(i >= explore.length-1)
             stop(exploreInterval);
         let exploreDom  = document.getElementById(explore[i]);
-        exploreDom.style.backgroundColor = "#272f3d";
+        exploreDom.style.backgroundColor = '#272f3d';
         i++;   
     },100);
 }
@@ -166,47 +166,50 @@ const btn4 = document.querySelector('#btn-4').addEventListener('click',Reset);
 const startBtn = document.querySelector('#start-btn').addEventListener('click',start);
 
 function clicked(e){
-    if(btn === "btn-1"){
+    if(btn === 'btn-1'){
         source = parseInt(e.target.id);
         src = source;
         let srcDom = document.getElementById(e.target.id);
-        srcDom.style.backgroundColor = "#5139b3";
+        srcDom.style.backgroundColor = '#5139b3';
         console.log(`source ${source}`);
     }
         
 
-    if(btn === "btn-2"){
+    if(btn === 'btn-2'){
         destination = parseInt(e.target.id);
         desti = destination;
         let destiDom = document.getElementById(e.target.id);
-        destiDom.style.backgroundColor="#5139b3";
+        destiDom.style.backgroundColor='#5139b3';
         console.log(`destination ${destination}`);
     }
         
-    if(btn === "btn-3"){
-        let a = e.target.id;
+    if(btn === 'btn-3'){
+        let a = parseInt(e.target.id);
         mp[a] = true;
         let wallDom = document.getElementById(a);
-        wallDom.style.backgroundColor = "#b3393d";
+        wallDom.style.backgroundColor = '#b3393d';
+        console.log(mp);
     }
 
 } 
 
 function Reset(){
-    btn = '';
-    source = -1;
-    destination = -1;
-    dist = [];
-    createEdges = [];
-    ans = [];
-    for(let i=0;i<36;i++){
-        let resetNode = document.getElementById(i);
-        resetNode.style.backgroundColor = "#39b386";
-        resetNode.style.boxShadow = "none";
-    }
-    for(let i=0;i<n*n;i++){
-        mp[i] = false;
-    }
+    location.reload();
+    // btn = '';
+    // source = -1;
+    // destination = -1;
+    // dist = [];
+    // createEdges = [];
+    // ans = [];
+    // mp.forEach(i => i = false);
+    // for(let i=0;i<n*n;i++){
+    //     adj[i] = [];
+    // }
+    // for(let i=0;i<36;i++){
+    //     let resetNode = document.getElementById(i);
+    //     resetNode.style.backgroundColor = "#39b386";
+    //     resetNode.style.boxShadow = "none";
+    // }
 }
 
 
@@ -220,9 +223,9 @@ function createPath(){
             if(i>=ans.length-1)
                 stop(pathInterval);
             let elem = document.getElementById(ans[i]);
-            elem.style.background = "cyan";
-            elem.style.boxShadow = "0 0 5px cyan," +
-            "0 0 25px cyan," + "0 0 50px cyan,"+ "0 0 100px cyan";
+            elem.style.background = 'cyan';
+            elem.style.boxShadow = '0 0 5px cyan,' +
+            '0 0 25px cyan,' + '0 0 50px cyan,'+ '0 0 100px cyan';
             i++;
         },500);
 }
@@ -230,7 +233,7 @@ function createPath(){
 
 function start(){
     if(source !== -1 && destination !== -1){
-        createEdges();
+        createEdgesFunc();
         ans.push(destination);
         dijkstra(source);
         getPath();
@@ -241,25 +244,25 @@ function start(){
         },100*explore.length);
     }
     else    
-        console.log("please select source and destination");  
+        console.log('please select source and destination');  
 }
 
-for(let i=0;i<36;i++){
-    let d1 = document.createElement('div');
-    d1.className = 'item';
-    d1.id = `${i}`;
-    d1.addEventListener('click',clicked);
-    container.append(d1);
-}
-
-
-
-
-
-// NODES.map(i=>{
+// for(let i=0;i<36;i++){
 //     let d1 = document.createElement('div');
 //     d1.className = 'item';
 //     d1.id = `${i}`;
 //     d1.addEventListener('click',clicked);
 //     container.append(d1);
-// });
+// }
+
+
+
+
+
+NODES.map(i=>{
+    let d1 = document.createElement('div');
+    d1.className = 'item';
+    d1.id = `${i}`;
+    d1.addEventListener('click',clicked);
+    container.append(d1);
+});
